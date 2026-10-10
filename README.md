@@ -29,3 +29,6 @@ VirtualBox NAT Network "KsLabnet", 10.10.10.0/24, gateway 10.10.10.1, DHCP enabl
 - Users, groups, and least-privilege sudo rules
 - Knowledge-base articles (password reset, new employee onboarding, SSH access troubleshooting)
 - Windows Server with Active Directory
+  - Accounts (ksserver2): groups helpdesk and webadmins; users mlopez and jsmith created with temporary passwords and a forced change at first login.
+- Least-privilege sudo (ksserver2): the helpdesk group may only run "systemctl is-active ssh" and "systemctl restart ssh". The rule was validated with visudo before install, and a disallowed command (apt update) was refused as expected.
+- Lesson: sudo matches commands exactly, including arguments, and "systemctl status" can launch a pager, so the rule uses "is-active" instead.
