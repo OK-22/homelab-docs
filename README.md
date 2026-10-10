@@ -12,3 +12,4 @@ VirtualBox NAT Network "KsLabnet", 10.10.10.0/24, gateway 10.10.10.1, DHCP enabl
 
 ## Build log
 - ksserver: installed with LVM and OpenSSH, user admink1, fully updated, baseline recorded (9.8 GB root volume, 1.9 GB RAM), snapshot "fresh-install" taken.
+- ksserver2: cloned from ksserver; hostname, machine ID, and SSH host keys regenerated so the clone has its own identity.
