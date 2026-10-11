@@ -18,17 +18,18 @@ VirtualBox NAT Network "KsLabnet", 10.10.10.0/24, gateway 10.10.10.1, DHCP enabl
 - Remote access: NAT Network port-forward rules for SSH (host ports 2211 and 2212), tested from the Windows host.
 - SSH keys: ed25519 key pair created on the Windows host, public key installed on both servers, host aliases added in the SSH config file.
 - SSH hardening: password authentication and root login disabled, key-only access, MaxAuthTries 3 (drop-in file 01-hardening.conf), verified from the Windows host with a key-less login attempt that was refused.
+- Accounts (both servers): groups helpdesk and webadmins; users mlopez and jsmith created with temporary passwords and a forced change at first login.
+- Least-privilege sudo (both servers): the helpdesk group may only run "systemctl is-active ssh" and "systemctl restart ssh". The rule was validated with visudo before install, and a disallowed command (apt update) was refused as expected.
 
 ## Lessons learned
 - Netplan YAML needs exact spacing, including a space after each list dash. "netplan generate" catches syntax errors before they are applied, and "netplan try" rolls back automatically if the network breaks.
 - Clones share a machine ID and SSH host keys, so both had to be regenerated.
 - Take snapshots with the VM fully powered off. A live snapshot taken during a shutdown stalled and had to be redone.
 - Keep a second SSH session open when changing SSH settings, so a mistake does not lock you out.
+- Sudo matches commands exactly, including arguments, and "systemctl status" can open a pager that runs as root, so the helpdesk rule uses "is-active" instead.
+- A VM that would not start, with VERR_ACCESS_DENIED in the log, had a folder its user could not write to; granting the user Modify rights with icacls from an elevated shell fixed it.
+- A VM that hung at "Loading essential drivers" after an aborted session recovered with a hard reset; "VBoxManage controlvm screenshotpng" showed the console state without opening the GUI.
 
 ## Planned
-- Users, groups, and least-privilege sudo rules
 - Knowledge-base articles (password reset, new employee onboarding, SSH access troubleshooting)
 - Windows Server with Active Directory
-  - Accounts (ksserver2): groups helpdesk and webadmins; users mlopez and jsmith created with temporary passwords and a forced change at first login.
-- Least-privilege sudo (ksserver2): the helpdesk group may only run "systemctl is-active ssh" and "systemctl restart ssh". The rule was validated with visudo before install, and a disallowed command (apt update) was refused as expected.
-- Lesson: sudo matches commands exactly, including arguments, and "systemctl status" can launch a pager, so the rule uses "is-active" instead.
