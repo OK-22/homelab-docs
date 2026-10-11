@@ -35,4 +35,4 @@ VirtualBox NAT Network "KsLabnet", 10.10.10.0/24, gateway 10.10.10.1, DHCP enabl
 - [KB-01: Reset a Linux user's password and force a change](kb-01-password-reset.md)
 - [KB-02: Onboard a new employee (and offboard)](kb-02-new-employee-onboarding.md)
 - [KB-03: Troubleshoot an SSH access problem](kb-03-ssh-access-troubleshooting.md)
-- Windows Server with Active Directory
+- Active Directory (kslab.local): OU structure (KSLab with Users, Groups, Computers), security groups HelpDesk and WebAdmins, and users mlopez and jsmith created with a generated temporary password and a forced change at first login. Group membership assigned with PowerShell.
