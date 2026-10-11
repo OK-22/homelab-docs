@@ -31,5 +31,8 @@ VirtualBox NAT Network "KsLabnet", 10.10.10.0/24, gateway 10.10.10.1, DHCP enabl
 - A VM that hung at "Loading essential drivers" after an aborted session recovered with a hard reset; "VBoxManage controlvm screenshotpng" showed the console state without opening the GUI.
 
 ## Planned
-- Knowledge-base articles (password reset, new employee onboarding, SSH access troubleshooting)
+## Knowledge base
+- [KB-01: Reset a Linux user's password and force a change](kb-01-password-reset.md)
+- [KB-02: Onboard a new employee (and offboard)](kb-02-new-employee-onboarding.md)
+- [KB-03: Troubleshoot an SSH access problem](kb-03-ssh-access-troubleshooting.md)
 - Windows Server with Active Directory
